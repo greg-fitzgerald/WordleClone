@@ -3,9 +3,8 @@ import React from 'react';
 import { sample } from '../../utils';
 import { WORDS } from '../../data';
 import Guess from '../Guess'
-import pre
+import PreviousGuesses from '../PreviousGuesses'
 
-import { checkGuess } from '../../game-helpers';
 
 
 // Pick a random word on every pageload.
@@ -18,7 +17,10 @@ function Game() {
   const [guessList, setGuessList] = React.useState([])
 
   return (
-    <Guess guess={guess} setGuess={setGuess} guessList={guessList} setGuessList={setGuessList}/>
+    <div>
+      <PreviousGuesses guessList={guessList}/>
+      <Guess guess={guess} setGuess={setGuess} guessList={guessList} setGuessList={setGuessList}/>
+    </div>
   );
 }
 
