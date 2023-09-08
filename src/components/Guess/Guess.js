@@ -4,7 +4,6 @@ function Guess({guess, setGuess, guessList, setGuessList}) {
   
   function handleSubmit(event) {
     event.preventDefault();
-    console.log(guess)
     setGuessList([...guessList, guess])
     setGuess('')
   }
