@@ -1,12 +1,25 @@
 import React from 'react';
+import {checkGuess} from '../../game-helpers'
+import { NUM_OF_GUESSES_ALLOWED } from '../../constants';
 
-function Guess({guess, setGuess, guessList, setGuessList}) {
+function Guess({guess, setGuess, guessList, setGuessList, answer, gameStatus, setGameStatus}) {
   
   function handleSubmit(event) {
     event.preventDefault();
-    setGuessList([...guessList, guess])
+
+    
+    setGuessList([...guessList, checkGuess(guess, answer)])
+    
+    if (guess == answer) { 
+      setGameStatus('W');
+    } else if (guessList.length == NUM_OF_GUESSES_ALLOWED - 1) {
+      setGameStatus('L')
+    }
+
     setGuess('')
   }
+
+  const disable = gameStatus != 'In Progress' ? true : false;
 
   return (
 
@@ -18,7 +31,8 @@ function Guess({guess, setGuess, guessList, setGuessList}) {
         type="text"
         value={guess}
         minLength="5"
-        maxLength="5"  
+        maxLength="5"
+        disabled={disable}
         onChange={(event) => {
           setGuess(event.target.value.toUpperCase())
         }}
